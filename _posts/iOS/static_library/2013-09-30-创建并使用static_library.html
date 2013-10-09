@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+<link rel="stylesheet" type="text/css" href="/css/pygments/native.css">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
@@ -164,24 +165,28 @@ sup {
 <img src="/assets/images/posts/createStaticLibraryProject.png" title="" alt="create static library project" /><br/>
 建立好project以后，将已经存在的source file添加到project中，我以最简单的一个c file为例：</p>
 
-<pre><code>//zenLog.h  
+<pre><code>{% highlight c %}
+//zenLog.h  
 #ifndef __ZENLOG_H__
 #define __ZENLOG_H__
 
 void hello();
 
 #endif  
+{% endhighlight %}
 </code></pre>
 
 <p>实现</p>
 
-<pre><code>//zenLog.c
+<pre><code>{% highlight c %}
+//zenLog.c
 #include &lt;stdio.h&gt;
 #include "zenLog.h"
 
 void hello() {
     printf( "Hello, World!" );
 }
+{% endhighlight %}
 </code></pre>
 
 <p>将这两个文件添加到project中以后<br/>
@@ -195,10 +200,12 @@ void hello() {
 
 <p>3.在viewController.m的viewDidLoad中添加</p>
 
-<pre><code>-(void)viewDidLoad {
+<pre><code>{% highlight objc %}
+-(void)viewDidLoad {
     [ super viewDidLoad ];
     hello();
-}  
+}
+{% endhighlight %}  
 </code></pre>
 
 <p>4.compile &amp; run; "<strong>Hello, World!</strong>"就会在XCode的output窗口显示出来。<br/>
