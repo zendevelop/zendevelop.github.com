@@ -5,9 +5,9 @@
 ![create static library project](/assets/images/posts/createStaticLibraryProject.png")  
 建立好project以后，将已经存在的source file添加到project中，我以最简单的一个c file为例：  
 
-	{% highlight c %}
+	{% highlight c %}  
 	//zenLog.h  
-	#ifndef __ZENLOG_H__
+	#ifndef __ZENLOG_H__  
 	#define __ZENLOG_H__
 
 	void hello();
@@ -16,7 +16,6 @@
 	{% endhighlight %}
 实现
 
-	{% highlight c %}
 	//zenLog.c
 	#include <stdio.h>
 	#include "zenLog.h"
@@ -24,7 +23,7 @@
 	void hello() {
 		printf( "Hello, World!" );
 	}
-	{% endhighlight %}
+	
 将这两个文件添加到project中以后  
 ![add source files](/assets/images/posts/addLibrarySourceFiles.png)  
 直接进行compile，注意这个时候要把active scheme选择正确**for iOS device or iOS Simulator**（与后面要reference此lib 的APP project active scheme匹配，否则会出现此libary在APP project中无法正常加载的问题），此外，要注意需要debug还是release版本。编译完成以后，可以在Products group中选择对应的library，然后右键“Show in Finder”，这样为后续在APP project中添加引用做好准备。
@@ -44,4 +43,12 @@
 	{% endhighlight %}  
 4.compile & run; "**Hello, World!**"就会在XCode的output窗口显示出来。  
 ![output](/assets/images/posts/output.png)  
+
+注意：
+
+* 如果在static library中，有C++的部分，在APP中要调用对应的C++内容时，需要在compile前修改对应compiler的“compile source As” option为"__Objective C++__"(默认为"According to File Type")，否则会在compile阶段出现error；  
+![compile option](/assets/images/posts/compileOption.png)  
+* 另外，在把compile option设置为objective C++以后，之前static library中的zenLog.c中定义的hello() function会在APP中调用有问题，解决办法是在static library中把zenLog.c改名为 zenLog.cpp.  
+
+
 	
