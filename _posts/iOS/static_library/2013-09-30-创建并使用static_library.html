@@ -165,9 +165,9 @@ sup {
 <img src="/assets/images/posts/createStaticLibraryProject.png" title="" alt="create static library project" /><br/>
 建立好project以后，将已经存在的source file添加到project中，我以最简单的一个c file为例：</p>
 
-<pre><code>{% highlight c %}
+<pre><code>{% highlight c %}  
 //zenLog.h  
-#ifndef __ZENLOG_H__
+#ifndef __ZENLOG_H__  
 #define __ZENLOG_H__
 
 void hello();
@@ -178,15 +178,13 @@ void hello();
 
 <p>实现</p>
 
-<pre><code>{% highlight c %}
-//zenLog.c
+<pre><code>//zenLog.c
 #include &lt;stdio.h&gt;
 #include "zenLog.h"
 
 void hello() {
     printf( "Hello, World!" );
 }
-{% endhighlight %}
 </code></pre>
 
 <p>将这两个文件添加到project中以后<br/>
@@ -210,5 +208,14 @@ void hello() {
 
 <p>4.compile &amp; run; "<strong>Hello, World!</strong>"就会在XCode的output窗口显示出来。<br/>
 <img src="/assets/images/posts/output.png" alt="output" /></p>
+
+<p>注意：</p>
+
+<ul>
+<li>如果在static library中，有C++的部分，在APP中要调用对应的C++内容时，需要在compile前修改对应compiler的“compile source As” option为"<strong>Objective C++</strong>"(默认为"According to File Type")，否则会在compile阶段出现error；<br/>
+<img src="/assets/images/posts/compileOption.png" alt="compile option" /></li>
+<li>另外，在把compile option设置为objective C++以后，之前static library中的zenLog.c中定义的hello() function会在APP中调用有问题，解决办法是在static library中把zenLog.c改名为 zenLog.cpp.</li>
+</ul>
+
 </body>
 </html>
